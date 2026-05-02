@@ -3,3 +3,18 @@
 @theme {
   --color-primary: #00abc6;
 }
+/* Hide scrollbar */
+.scroll-container {
+  overflow: auto;
+
+  /* Chrome, Safari */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+img {
+  -webkit-user-drag: none;
+}

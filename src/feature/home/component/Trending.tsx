@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import useTrending from "../../../core/store/useTrending";
 import { catalogURL } from "../../../api/baseURL";
+import MovieContainer from "./MovieContainer";
 
-export default function Trending() {
+export default function Trending({ col }: { col: number }) {
   const movies = useTrending((state) => state.movies);
   const addMovies = useTrending((state) => state.addMovies);
   async function getMovies() {
@@ -23,5 +24,14 @@ export default function Trending() {
       getMovies();
     }
   }, []);
-  return <div></div>;
+  return (
+    <MovieContainer
+      col={col}
+      category={{
+        id: "trending",
+        name: "Trending",
+        movies: movies,
+      }}
+    />
+  );
 }

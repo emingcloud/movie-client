@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 
 interface Menu {
   name: string;
@@ -17,23 +17,24 @@ const menus: Menu[] = [
 ];
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const renderMenu = useMemo(() => {
     return menus.map((m) => {
       return (
         <div
           key={m.dest}
           onClick={() => navigate(m.dest)}
-          className="hover:cursor-pointer"
+          className={`hover:cursor-pointer ${location.pathname === m.dest && "text-primary"} transition-colors duration-300`}
         >
           {m.name}
         </div>
       );
     });
-  }, [navigate]);
+  }, [navigate, location]);
   return (
     <>
       <div className="flex justify-between items-center py-4 px-8 z-10 absolute bg-[#0000008d] text-[#cccccc] w-full">
-        <h1 className="text-4xl text-[#00ace6]">APPNAME</h1>
+        <h1 className="text-4xl text-primary">APPNAME</h1>
         <div className="flex items-center gap-8 text-2xl select-none">
           {renderMenu}
           <img

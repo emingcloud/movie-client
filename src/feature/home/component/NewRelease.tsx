@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import useNewRelease from "../../../core/store/useNewRelease";
 import { catalogURL } from "../../../api/baseURL";
+import MovieContainer from "./MovieContainer";
 
-export default function NewRelease() {
+export default function NewRelease({ col }: { col: number }) {
   const movies = useNewRelease((state) => state.movies);
   const addMovies = useNewRelease((state) => state.addMovies);
   async function getMovies() {
@@ -23,5 +24,14 @@ export default function NewRelease() {
       getMovies();
     }
   }, []);
-  return <div></div>;
+  return (
+    <MovieContainer
+      col={col}
+      category={{
+        id: "new release",
+        name: " New Release",
+        movies: movies,
+      }}
+    />
+  );
 }
