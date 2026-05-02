@@ -1,20 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useHighlight from "../../../core/store/useHighlight";
+import { catalogURL } from "../../../api/baseURL";
 
 export default function Highlight() {
-  const [movie, setMovie] = useState({
-    title: "Howl's Moving Castle",
-    plot: "Sophie, a young milliner, is turned into an elderly woman by a witch who enters her shop and curses her. She encounters a wizard named Howl and gets caught up in his resistance to fighting for the king.",
-  });
+  const movie = useHighlight((s) => s.movie);
+  const setMovie = useHighlight((s) => s.setMovie);
+  async function getHighlight() {
+    try {
+      const response = await fetch(`${catalogURL}/highlight`, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const content = await response.json();
+      setMovie(content.movie);
+    } catch (error) {}
+  }
+  useEffect(() => {
+    if (!movie) {
+      getHighlight();
+    }
+  }, []);
   return (
     <div className="relative flex w-full aspect-video lg:h-[calc(1024px*9/16)] items-center">
-      <img
-        src="./backdrop.webp"
-        className="w-full h-full object-cover absolute"
-        alt=""
-      />
+      {movie?.backdrop ? (
+        <img
+          src={movie.backdrop}
+          className="w-full h-full object-cover absolute"
+          alt=""
+        />
+      ) : (
+        <div className="w-full flex items-center justify-center h-full object-cover absolute">
+          <img className="w-48 h-48" src="./no-image.png" alt="" />
+        </div>
+      )}
+
       <div className="flex flex-col z-0 px-8 sm:w-[75%] md:w-[50%]">
-        <h1 className="text-white text-3xl ">{movie.title}</h1>
-        <p className="text-[#e4e4e4] ">{movie.plot}</p>
+        {movie ? (
+          <>
+            <h1 className="text-white text-3xl ">{movie.title}</h1>
+            <p className="text-[#e4e4e4] ">{movie.plot}</p>
+          </>
+        ) : (
+          <div className="text-white">loading...</div>
+        )}
       </div>
     </div>
   );

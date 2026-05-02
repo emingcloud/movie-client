@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Rest } from "../../../interface/Rest";
+import { useNavigate } from "react-router";
 
 export default function MovieContainer({
   category,
@@ -10,6 +11,7 @@ export default function MovieContainer({
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
   const total =
     category.movies.length % col === 0
@@ -27,6 +29,7 @@ export default function MovieContainer({
         );
       });
   }
+
   useEffect(() => {
     if (offset > total - 1 && total > 0) {
       setOffset(total - 1);
@@ -66,16 +69,28 @@ export default function MovieContainer({
           className={`w-full flex gap-2 transition-transform duration-300`}
         >
           {category.movies!.map((m) => {
-            return (
+            return m.backdrop ? (
               <img
+                onClick={() => navigate(`/m/${m.id}`)}
                 style={{
                   width: `calc(${100 / col}% - (8px * ${col - 1})/${col})`,
                 }}
                 className="aspect-video hover:cursor-pointer rounded-lg border-[#6e6e6e] border"
                 alt=""
-                src={m.backdrop ? m.backdrop : "./backdrop.webp"}
+                src={m.backdrop}
                 key={m.id}
               />
+            ) : (
+              <div
+                onClick={() => navigate(`/m/${m.id}`)}
+                key={m.id}
+                style={{
+                  width: `calc(${100 / col}% - (8px * ${col - 1})/${col})`,
+                }}
+                className="aspect-video flex justify-center items-center hover:cursor-pointer rounded-lg border-[#6e6e6e] border"
+              >
+                <img className="w-12 h-12" src="./no-image.png" alt="" />
+              </div>
             );
           })}
         </div>

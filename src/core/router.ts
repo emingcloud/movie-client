@@ -6,6 +6,7 @@ import Login from "../feature/login/component/Login";
 import Error from "../feature/error/Error";
 import Header from "../shared/Header";
 import Browse from "../feature/browse/component/Browse";
+import Detail from "../feature/detail/component/Detail";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
                 path: "/browse",
               },
             ],
+          },
+          {
+            Component: Detail,
+            path: "/m/:id",
           },
         ],
       },
