@@ -7,6 +7,7 @@ import Error from "../feature/error/Error";
 import Header from "../shared/Header";
 import Browse from "../feature/browse/component/Browse";
 import Detail from "../feature/detail/component/Detail";
+import MovieDetail from "../feature/detail/component/MovieDetail";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             ],
           },
           {
-            Component: Detail,
+            Component: MovieDetail,
             path: "/m/:id",
           },
         ],
