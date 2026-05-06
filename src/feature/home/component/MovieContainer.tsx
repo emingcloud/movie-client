@@ -20,7 +20,7 @@ export default function MovieContainer({
   function renderPagination() {
     return Array(total)
       .fill(0)
-      .map((v, idx) => {
+      .map((_, idx) => {
         return (
           <div
             key={idx}

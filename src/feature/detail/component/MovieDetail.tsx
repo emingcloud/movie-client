@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { catalogURL } from "../../../api/baseURL";
 import type { Rest } from "../../../interface/Rest";
@@ -33,20 +33,21 @@ const MovieDetail = () => {
         Loading...
       </div>
     );
-
   return (
     <div className="relative min-h-screen bg-[#0a0f14] text-white font-sans overflow-hidden">
       {/* Backdrop Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-30"
-        style={{ backgroundImage: `url(${movie.backdrop})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f14] via-transparent to-[#0a0f14]" />
+      <div className="absolute inset-0 bg-cover bg-center opacity-30">
+        <img
+          className="object-cover w-full h-full"
+          src={movie.backdrop}
+          alt=""
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0f14] via-transparent to-[#0a0f14]" />
       </div>
 
-      <main className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center min-h-screen p-8 lg:p-24 gap-12">
+      <main className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center min-h-screen p-8 lg:p-24 gap-6">
         {/* Thumbnail Image */}
-        <div className="w-64 lg:w-96 flex-shrink-0 shadow-2xl rounded-xl overflow-hidden border border-white/10">
+        <div className="w-64 lg:w-80 shrink-0 shadow-2xl rounded-xl overflow-hidden border border-white/10">
           <img
             src={movie.thumbnail}
             alt={movie.title}
@@ -59,7 +60,7 @@ const MovieDetail = () => {
           <h1 className="text-5xl lg:text-8xl font-black mb-4 tracking-tighter uppercase leading-none">
             {movie.title}
           </h1>
-          <span>{new Date(movie.release).getFullYear()}</span>
+          <div className="py-4">{new Date(movie.release).getFullYear()}</div>
           {/* Categories (Junction Table Data) */}
           <div className="flex flex-wrap gap-3 mb-10">
             {movie.categories.map((cat) => (

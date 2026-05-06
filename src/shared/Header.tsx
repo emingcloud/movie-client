@@ -33,8 +33,10 @@ export default function Header() {
   }, [navigate, location]);
   return (
     <>
-      <div className="flex justify-between items-center py-4 px-8 z-10 absolute bg-[#0000008d] text-[#cccccc] w-full">
-        <h1 className="text-4xl text-primary">APPNAME</h1>
+      <div
+        className={`flex justify-between items-center py-4 px-8 z-10 ${location.pathname === "/" && "absolute"} bg-[#0000008d] text-[#cccccc] w-full`}
+      >
+        <h1 className="text-4xl text-primary">STREAMCORE</h1>
         <div className="flex items-center gap-8 text-2xl select-none">
           {renderMenu}
           <img
