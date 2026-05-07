@@ -19,21 +19,25 @@ interface Action {
   setOffset: (offset: number) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
+  reset: () => void;
 }
+const init: State = {
+  selectedCategoryID: "all",
+  movies: [],
+  categories: [
+    {
+      id: "all",
+      name: "All",
+    },
+  ],
+  hasMore: true,
+  offset: 0,
+  loading: false,
+  error: null,
+};
 const useDiscovery = create<State & Action>((set) => {
   return {
-    selectedCategoryID: "all",
-    movies: [],
-    categories: [
-      {
-        id: "all",
-        name: "All",
-      },
-    ],
-    hasMore: true,
-    offset: 0,
-    loading: false,
-    error: null,
+    ...init,
     setSelectedCategoryID: (id) => set({ selectedCategoryID: id }),
     setMovies: (movies) => set({ movies: movies }),
     addMovies: (movies) =>
@@ -44,6 +48,17 @@ const useDiscovery = create<State & Action>((set) => {
     setOffset: (offset) => set({ offset: offset }),
     setLoading: (loading) => set({ loading: loading }),
     setError: (error) => set({ error: error }),
+    reset: () =>
+      set({
+        ...init,
+        movies: [],
+        categories: [
+          {
+            id: "all",
+            name: "All",
+          },
+        ],
+      }),
   };
 });
 

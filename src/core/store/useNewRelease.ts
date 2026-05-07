@@ -6,6 +6,7 @@ interface State {
 }
 interface Action {
   addMovies: (movies: Rest.Movie[]) => void;
+  reset: () => void;
 }
 const useNewRelease = create<State & Action>((set) => {
   return {
@@ -15,6 +16,10 @@ const useNewRelease = create<State & Action>((set) => {
         return {
           movies: [...state.movies, ...movies],
         };
+      }),
+    reset: () =>
+      set({
+        movies: [],
       }),
   };
 });

@@ -8,6 +8,7 @@ import Header from "../shared/Header";
 import Browse from "../feature/browse/component/Browse";
 import Detail from "../feature/detail/component/Detail";
 import MovieDetail from "../feature/detail/component/MovieDetail";
+import VideoPlayer from "../feature/VideoPlayer/component/VideoPlayer";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             Component: MovieDetail,
             path: "/m/:id",
+          },
+          {
+            Component: VideoPlayer,
+            path: "/watch/:id",
           },
         ],
       },

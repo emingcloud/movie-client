@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { catalogURL } from "../../../api/baseURL";
 import type { Rest } from "../../../interface/Rest";
 
@@ -7,6 +7,7 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState<Rest.Movie | null>(null);
   const [loading, setLoading] = useState(true);
   const params = useParams();
+  const navigate = useNavigate();
   async function getMovie() {
     try {
       const response = await fetch(`${catalogURL}/movies/${params.id}`, {
@@ -82,7 +83,16 @@ const MovieDetail = () => {
               "{movie.plot}"
             </p>
           </div>
-          <button className="flex hover:cursor-pointer items-center gap-3 bg-white text-black px-10 py-4 rounded-full font-black hover:scale-105 transition-transform">
+          <button
+            onClick={() =>
+              navigate(`/watch/${params.id}`, {
+                state: {
+                  video: movie.video,
+                },
+              })
+            }
+            className="flex hover:cursor-pointer items-center gap-3 bg-white text-black px-10 py-4 rounded-full font-black hover:scale-105 transition-transform"
+          >
             {/* Play SVG */}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="black">
               <path d="M8 5v14l11-7z" />

@@ -6,6 +6,7 @@ interface State {
 }
 interface Action {
   addMovies: (movies: Rest.Movie[]) => void;
+  reset: () => void;
 }
 const useTrending = create<State & Action>((set) => {
   return {
@@ -16,6 +17,7 @@ const useTrending = create<State & Action>((set) => {
           movies: [...state.movies, ...movies],
         };
       }),
+    reset: () => set({ movies: [] }),
   };
 });
 export default useTrending;

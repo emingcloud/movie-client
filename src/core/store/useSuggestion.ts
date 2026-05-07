@@ -6,6 +6,7 @@ interface State {
 }
 interface Action {
   addCategories: (movies: Rest.Category[]) => void;
+  reset: () => void;
 }
 const useSuggestion = create<State & Action>((set) => {
   return {
@@ -15,6 +16,10 @@ const useSuggestion = create<State & Action>((set) => {
         return {
           categories: [...state.categories, ...categories],
         };
+      }),
+    reset: () =>
+      set({
+        categories: [],
       }),
   };
 });

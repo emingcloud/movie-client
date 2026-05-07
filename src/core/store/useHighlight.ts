@@ -6,12 +6,19 @@ interface State {
 }
 interface Action {
   setMovie: (movie: Rest.Movie) => void;
+  reset: () => void;
 }
-
+const init: State = {
+  movie: null,
+};
 const useHighlight = create<State & Action>((set) => {
   return {
-    movie: null,
+    ...init,
     setMovie: (movie) => set({ movie: movie }),
+    reset: () =>
+      set({
+        movie: null,
+      }),
   };
 });
 export default useHighlight;
