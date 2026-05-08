@@ -156,7 +156,7 @@ export default function Header() {
           <img src="./profile.png" className="w-12 h-12" alt="" />
           <img src="./down.png" className="w-6 h-6" alt="" />
           {openProfile && (
-            <div className="absolute p-4 bottom-0 bg-[#292929] translate-y-[100%]">
+            <div className="absolute p-4 bottom-0 bg-[#292929] translate-y-full">
               <div
                 onClick={() => {
                   resetDiscovery();

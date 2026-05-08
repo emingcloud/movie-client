@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 
 const HlsPlayer = () => {
   const location = useLocation();
-  const src = location.state?.video ?? null;
+  const src = location.state?.video ?? "";
   const videoRef = useRef<null | HTMLVideoElement>(null);
 
   useEffect(() => {
