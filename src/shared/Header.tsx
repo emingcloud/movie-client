@@ -77,7 +77,7 @@ export default function Header() {
   }, [searchResult]);
   useEffect(() => {
     if (openSearch) {
-      const handleClickOutside = (event) => {
+      const handleClickOutside = (event: any) => {
         if (searchRef.current && !searchRef.current.contains(event.target)) {
           setOpenSearch(false);
           setSearch("");
@@ -94,7 +94,7 @@ export default function Header() {
   }, [openSearch]);
   useEffect(() => {
     if (openProfile) {
-      const handleClickOutside = (event) => {
+      const handleClickOutside = (event: any) => {
         if (profileRef.current && !profileRef.current.contains(event.target)) {
           setOpenProfile(false);
         } else {

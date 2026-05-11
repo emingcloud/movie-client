@@ -14,9 +14,9 @@ export default function MovieContainer({
   const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
   const total =
-    category.movies.length % col === 0
-      ? category.movies.length / col
-      : Math.floor(category.movies.length / col) + 1;
+    category.movies!.length % col === 0
+      ? category.movies!.length / col
+      : Math.floor(category.movies!.length / col) + 1;
   function renderPagination() {
     return Array(total)
       .fill(0)

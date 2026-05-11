@@ -37,34 +37,38 @@ const MovieDetail = () => {
   return (
     <div className="relative min-h-screen bg-[#0a0f14] text-white font-sans overflow-hidden">
       {/* Backdrop Image */}
-      <div className="absolute inset-0 bg-cover bg-center opacity-30">
-        <img
-          className="object-cover w-full h-full"
-          src={movie.backdrop}
-          alt=""
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#0a0f14] via-transparent to-[#0a0f14]" />
-      </div>
+      {movie?.backdrop && (
+        <div className="absolute inset-0 bg-cover bg-center opacity-30">
+          <img
+            className="object-cover w-full h-full"
+            src={movie.backdrop}
+            alt=""
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0a0f14] via-transparent to-[#0a0f14]" />
+        </div>
+      )}
 
       <main className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center min-h-screen p-8 lg:p-24 gap-6">
         {/* Thumbnail Image */}
-        <div className="w-64 lg:w-80 shrink-0 shadow-2xl rounded-xl overflow-hidden border border-white/10">
-          <img
-            src={movie.thumbnail}
-            alt={movie.title}
-            className="w-full h-auto object-cover"
-          />
-        </div>
+        {movie?.thumbnail && (
+          <div className="w-64 lg:w-80 shrink-0 shadow-2xl rounded-xl overflow-hidden border border-white/10">
+            <img
+              src={movie.thumbnail}
+              alt={movie!.title}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        )}
 
         {/* Text Content */}
         <div className="max-w-3xl">
           <h1 className="text-5xl lg:text-8xl font-black mb-4 tracking-tighter uppercase leading-none">
-            {movie.title}
+            {movie!.title}
           </h1>
-          <div className="py-4">{new Date(movie.release).getFullYear()}</div>
+          <div className="py-4">{new Date(movie!.release!).getFullYear()}</div>
           {/* Categories (Junction Table Data) */}
           <div className="flex flex-wrap gap-3 mb-10">
-            {movie.categories.map((cat) => (
+            {movie!.categories!.map((cat) => (
               <span
                 key={cat.id}
                 className="px-5 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-sm font-semibold border border-white/5 uppercase tracking-wider"
@@ -80,14 +84,14 @@ const MovieDetail = () => {
               Description
             </h3>
             <p className="text-xl leading-relaxed text-gray-300 max-w-xl italic">
-              "{movie.plot}"
+              "{movie!.plot}"
             </p>
           </div>
           <button
             onClick={() =>
               navigate(`/watch/${params.id}`, {
                 state: {
-                  video: movie.video,
+                  video: movie!.video,
                 },
               })
             }

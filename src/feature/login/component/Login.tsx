@@ -28,24 +28,21 @@ export default function Login() {
       }
       setIsLogged(true);
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message);
     }
   }
   return (
     <div className="h-screen w-full relative flex items-center justify-center font-sans">
-      {/* Background Image */}
       <img
         src="./background-login.webp"
         className="absolute w-full h-full object-cover"
         alt="anime landscape background"
       />
 
-      {/* Netflix-style Gradient Overlay: Darker edges to focus the eye */}
       <div className="absolute bg-[#00000043] w-full h-full"></div>
       <div className="absolute inset-0 bg-radial-gradient(circle, transparent 20%, black 100%)"></div>
 
-      {/* Login Card */}
       <div className="relative w-full max-w-112.5 bg-black/75 rounded-md shadow-2xl p-12 mx-4 border border-white/10">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white">Sign In</h1>

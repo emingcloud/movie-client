@@ -8,7 +8,7 @@ export default function CategoryFilter() {
   const selectedID = useDiscovery((s) => s.selectedCategoryID);
   const setID = useDiscovery((s) => s.setSelectedCategoryID);
   const ref = useRef<HTMLDivElement | null>(null);
-  const handleWheel = (e) => {
+  const handleWheel = (e: any) => {
     if (ref.current) {
       ref.current.scrollBy({
         left: e.deltaY,
@@ -20,7 +20,7 @@ export default function CategoryFilter() {
     return categories.map((category) => {
       return (
         <div
-          onClick={() => setID(category.id)}
+          onClick={() => setID(category.id!)}
           className={`p-4 transition-colors duration-300 text-nowrap hover:cursor-pointer ${selectedID === category.id ? "bg-primary" : "bg-[#000000]"}  rounded-lg`}
           key={category.id}
         >

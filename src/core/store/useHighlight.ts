@@ -2,10 +2,10 @@ import { create } from "zustand";
 import type { Rest } from "../../interface/Rest";
 
 interface State {
-  movie: Rest.Movie;
+  movie: Rest.Movie | null;
 }
 interface Action {
-  setMovie: (movie: Rest.Movie) => void;
+  setMovie: (movie: Rest.Movie | null) => void;
   reset: () => void;
 }
 const init: State = {

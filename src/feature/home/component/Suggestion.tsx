@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { catalogURL } from "../../../api/baseURL";
 import useSuggestion from "../../../core/store/useSuggestion";
 import MovieContainer from "./MovieContainer";
@@ -23,7 +23,7 @@ export default function Suggestion({ col }: { col: number }) {
       }
       const content = await response.json();
       addMovies(content.categories);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error.message);
     }
   }
