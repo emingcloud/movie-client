@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import type { Rest } from "../interface/Rest";
-import { catalogURL } from "../api/baseURL";
+import { catalogURL, usersURL } from "../api/baseURL";
 import useAuth from "../core/store/useAuth";
 import useDiscovery from "../core/store/useDiscovery";
 import useHighlight from "../core/store/useHighlight";
@@ -37,6 +37,25 @@ export default function Header() {
   const resetTrending = useTrending((s) => s.reset);
   const [searchResult, setSearchResult] = useState<Rest.Movie[]>([]);
   const [search, setSearch] = useState("");
+  async function logout() {
+    try {
+      const response = await fetch(`${usersURL}/logout`, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      resetDiscovery();
+      resetHighlight();
+      resetNewRelease();
+      resetSuggestion();
+      resetTrending();
+      setIsLogged(false);
+    } catch (error: any) {
+      throw error;
+    }
+  }
   const renderMenu = useMemo(() => {
     return menus.map((m) => {
       return (
@@ -157,18 +176,7 @@ export default function Header() {
           <img src="./down.png" className="w-6 h-6" alt="" />
           {openProfile && (
             <div className="absolute p-4 bottom-0 bg-[#292929] translate-y-full">
-              <div
-                onClick={() => {
-                  resetDiscovery();
-                  resetHighlight();
-                  resetNewRelease();
-                  resetSuggestion();
-                  resetTrending();
-                  setIsLogged(false);
-                }}
-              >
-                logout
-              </div>
+              <div onClick={logout}>logout</div>
             </div>
           )}
         </div>
