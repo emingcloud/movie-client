@@ -63,7 +63,10 @@ export default function Highlight() {
             </p>
 
             {/* Action Buttons Placeholder */}
-            <div className="flex gap-4 pt-2">
+            <div
+              onClick={() => navigate(`/watch/${movie.id}`)}
+              className="flex gap-4 pt-2"
+            >
               <button className="bg-white hover:cursor-pointer text-black px-6 py-2 rounded font-semibold hover:bg-white/90 transition">
                 Play
               </button>
