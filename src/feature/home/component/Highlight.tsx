@@ -63,17 +63,17 @@ export default function Highlight() {
             </p>
 
             {/* Action Buttons Placeholder */}
-            <div
-              onClick={() =>
-                navigate(`/watch/${movie.id}`, {
-                  state: {
-                    video: movie.video,
-                  },
-                })
-              }
-              className="flex gap-4 pt-2"
-            >
-              <button className="bg-white hover:cursor-pointer text-black px-6 py-2 rounded font-semibold hover:bg-white/90 transition">
+            <div className="flex gap-4 pt-2">
+              <button
+                onClick={() =>
+                  navigate(`/watch/${movie.id}`, {
+                    state: {
+                      video: movie.video,
+                    },
+                  })
+                }
+                className="bg-white hover:cursor-pointer text-black px-6 py-2 rounded font-semibold hover:bg-white/90 transition"
+              >
                 Play
               </button>
               <button
